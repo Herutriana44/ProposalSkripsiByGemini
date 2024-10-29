@@ -1,0 +1,5 @@
+beautifulsoup4==4.12.3
+pandas
+PyMuPDF
+python-docx
+openpyxl
