@@ -3,7 +3,7 @@ from ProposalSkripsiByGemini import ProposalSkripsiByGemini
 import os
 
 def main():
-    st.set_page_config(page_title="Proposal Skripsi Generator", page_icon="🎓", layout="wide")
+    st.set_page_config(page_title="Proposal Skripsi Generator By Gemini", page_icon="🎓", layout="wide")
     st.title("🎓 Proposal Skripsi Generator")
     st.write("Aplikasi ini menggunakan AI untuk membantu Anda membuat proposal skripsi berdasarkan penelitian sebelumnya.")
 
