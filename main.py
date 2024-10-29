@@ -69,7 +69,7 @@ def main():
                 st.download_button(
                     label="📦 Unduh Semua Link (ZIP)",
                     data=file,
-                    file_name="links.zip",
+                    file_name="data_links_scholar.zip",
                     mime="application/zip"
                 )
         with col3:
