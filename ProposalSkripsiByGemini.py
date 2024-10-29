@@ -31,6 +31,7 @@ class ProposalSkripsiByGemini:
             "studi-pustaka1": "Buatkan studi pustaka berdasarkan paper-paper yang sudah direview sebelumnya",
             "studi-pustaka2": "Buatkan studi pustaka berdasarkan keyword-keyword sebelumnya",
             "metodpen": "Buatkan metodologi penelitian berdasarkan mengarah paper-paper sebelumnya dan dengan judul",
+            "daftar-pustaka" : "Buatkan daftar pustaka dengan format APA berdasarkan paper-paper sebelumnya"
         }
 
     def scrape_links_paper(self, url):
@@ -151,6 +152,9 @@ class ProposalSkripsiByGemini:
         with open('review_paper.json', 'w') as f:
             json.dump(review_paper, f)
         pendahuluan = review_paper
+        prompt_ = self.prompt['roleplay'] + "\n\n" + self.prompt['daftar-pustaka']
+        pendahuluan = self._gemini(prompt_, pendahuluan)
+        daftar_pustaka = pendahuluan['contents'][-1]['parts'][0]['text']
         prompt_ = self.prompt['roleplay'] + "\n\n" + self.prompt['pendahuluan'] + self.judul_skripsi
         pendahuluan = self._gemini(prompt_, pendahuluan)
         pendahuluan_skripsi = pendahuluan['contents'][-1]['parts'][0]['text']
@@ -214,6 +218,9 @@ Judul Skripsi : {self.judul_skripsi}
 
 ## Metodologi Penelitian
 {metodologi_penelitian}
+\n\n
+## Daftar Pustaka
+{daftar_pustaka}
 """
         self.export_to_docx(self.judul_skripsi, skripsi, self.hasil_file)
         return self.hasil_file, links_zip, pdf_link_zip
