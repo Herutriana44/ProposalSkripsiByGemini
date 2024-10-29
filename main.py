@@ -4,7 +4,7 @@ import os
 
 def main():
     st.set_page_config(page_title="Proposal Skripsi Generator By Gemini", page_icon="🎓", layout="wide")
-    st.title("🎓 Proposal Skripsi Generator")
+    st.title("🎓 Proposal Skripsi Generator By Gemini")
     st.write("Aplikasi ini menggunakan AI untuk membantu Anda membuat proposal skripsi berdasarkan penelitian sebelumnya.")
 
     # Sidebar for input fields
