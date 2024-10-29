@@ -1,5 +1,6 @@
 import streamlit as st
 from ProposalSkripsiByGemini import ProposalSkripsiByGemini
+import os
 
 def main():
     st.set_page_config(page_title="Proposal Skripsi Generator", page_icon="🎓", layout="wide")
@@ -13,7 +14,7 @@ def main():
     hasil_file = st.sidebar.text_input("Nama File Output", "skripsi.docx")
 
     if st.sidebar.button("Buat Proposal"):
-        if api_key.strip() == "":
+        if not api_key.strip():
             st.sidebar.error("API Key diperlukan untuk melanjutkan.")
         else:
             st.info("Mempersiapkan pembuatan proposal...")
@@ -31,28 +32,35 @@ def main():
                 st.success("Proposal berhasil dibuat!")
 
                 st.subheader("Unduh Hasil")
-                st.write("Klik untuk mengunduh file hasil:")
-                with open(hasil_docx, "rb") as file:
-                    st.download_button(
-                        label="📄 Unduh Proposal Skripsi (DOCX)",
-                        data=file,
-                        file_name=hasil_file,
-                        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                    )
-                with open(links_zip, "rb") as file:
-                    st.download_button(
-                        label="📦 Unduh Semua Link (ZIP)",
-                        data=file,
-                        file_name="links.zip",
-                        mime="application/zip"
-                    )
-                with open(pdf_link_zip, "rb") as file:
-                    st.download_button(
-                        label="📦 Unduh Semua PDF (ZIP)",
-                        data=file,
-                        file_name="pdf_files.zip",
-                        mime="application/zip"
-                    )
+                st.write("Klik tombol di bawah ini untuk mengunduh file hasil:")
+
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    with open(hasil_docx, "rb") as file:
+                        st.download_button(
+                            label="📄 Unduh Proposal Skripsi (DOCX)",
+                            data=file,
+                            file_name=hasil_file,
+                            mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        )
+                with col2:
+                    with open(links_zip, "rb") as file:
+                        st.download_button(
+                            label="📦 Unduh Semua Link (ZIP)",
+                            data=file,
+                            file_name="links.zip",
+                            mime="application/zip"
+                        )
+                with col3:
+                    with open(pdf_link_zip, "rb") as file:
+                        st.download_button(
+                            label="📦 Unduh Semua PDF (ZIP)",
+                            data=file,
+                            file_name="pdf_files.zip",
+                            mime="application/zip"
+                        )
+
             except Exception as e:
                 st.error(f"Terjadi kesalahan: {str(e)}")
 
